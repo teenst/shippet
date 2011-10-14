@@ -12,17 +12,28 @@ class App < Sinatra::Base
   use Rack::Session::Cookie, :expire_after => 3600 * 24, :secret => "change me"
 
   use OmniAuth::Builder do
-    pp ENV
     provider :twitter, ENV["TW_TOKEN"], ENV["TW_SECRET"]
     provider :github, ENV["GH_TOKEN"], ENV["GH_SECRET"]
   end
 
   helpers do
     alias_method :h, :escape_html
+
+    def current_user
+      @user ||= Model::User.find_by_id session[:sid]
+    end
+
+    def login?
+      current_user != nil
+    end
   end
 
   get '/' do
-    'shippet'
+    if login?
+      "shippet user: #{current_user["name"]}"
+    else
+      "shippet"
+    end
   end
 
   get '/snippet/create' do
@@ -38,7 +49,8 @@ class App < Sinatra::Base
   end
 
   get '/auth/:provider/callback' do |provider|
-    pp request.env["omniauth.auth"]
-    "#{provider} ok"
+    user = Model::User.find_or_create request.env["omniauth.auth"]
+    session[:sid] = user["_id"]
+    redirect "/"
   end
 end
