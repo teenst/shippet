@@ -1,4 +1,5 @@
 require 'model/database'
+require 'model/collection'
 require 'model/snippet'
 require 'logger'
 
