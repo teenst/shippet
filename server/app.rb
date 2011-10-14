@@ -30,7 +30,7 @@ class App < Sinatra::Base
 
   get '/' do
     if login?
-      "shippet user: #{current_user["name"]}"
+      "shippet user: #{current_user.name}"
     else
       "shippet"
     end
@@ -49,8 +49,8 @@ class App < Sinatra::Base
   end
 
   get '/auth/:provider/callback' do |provider|
-    user = Model::User.find_or_create request.env["omniauth.auth"]
-    session[:sid] = user["_id"]
+    user = Model::User.find_by_auth_or_create request.env["omniauth.auth"]
+    session[:sid] = user.id
     redirect "/"
   end
 end
