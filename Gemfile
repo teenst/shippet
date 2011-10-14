@@ -5,4 +5,6 @@ gem 'shotgun'
 gem 'mongo'
 gem 'mongo_ext'
 gem 'bson_ext'
+gem 'omniauth'
+gem 'hashie', '2.0.0.beta', :git => "git://github.com/intridea/hashie.git"
 
