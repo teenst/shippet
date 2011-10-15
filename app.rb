@@ -3,6 +3,11 @@ require 'sinatra'
 require 'model'
 
 class App < Sinatra::Base
+
+  helpers do
+    alias_method :h, :escape_html
+  end
+
   get '/' do
     'shippet'
   end
@@ -11,12 +16,12 @@ class App < Sinatra::Base
     "create snippet"
     erb :create_snippet
   end
-  
+
   post '/snippet/create' do
     snippet = Model::Snippet.create(params)
     p snippet
     "#{params[:code]} #{params[:mode]}"
-    
+
   end
 
 end
