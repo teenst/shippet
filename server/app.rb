@@ -29,11 +29,7 @@ class App < Sinatra::Base
   end
 
   get '/' do
-    if login?
-      "shippet user: #{current_user.name}"
-    else
-      "shippet"
-    end
+    erb :index
   end
 
   get '/snippet/create' do

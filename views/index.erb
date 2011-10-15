@@ -1,0 +1,6 @@
+<% if login? %>
+<h2>user: <%=h current_user.name %></h2>
+<% else %>
+<p><a href="/auth/twitter">twitter</a></p>
+<p><a href="/auth/github">github</a></p>
+<% end %>
