@@ -1,6 +1,7 @@
 require 'bundler/setup'
 require 'sinatra'
 require 'model'
+require 'json'
 
 class App < Sinatra::Base
 
@@ -22,6 +23,19 @@ class App < Sinatra::Base
     p snippet
     "#{params[:code]} #{params[:mode]}"
 
+  end
+
+  get '/snippet/client_test.json' do
+    content_type :json
+    JSON.unparse(
+      mode:"text-mode",
+      snippet: <<-EOF
+#name: ${1:name}
+#key: ${2:key}
+#--
+test $1 snippet
+EOF
+      )
   end
 
 end
