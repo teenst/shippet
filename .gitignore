@@ -1,0 +1,3 @@
+/server/vendor/
+/server/.bundle/
+/server/Gemfile.lock
