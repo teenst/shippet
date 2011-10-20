@@ -21,5 +21,10 @@ module Model
       p body
       {body: body}
     end
+
+    def self.remove(id)
+      # 作者のみ消せるにする
+      self.remove(id)
+    end
   end
 end
