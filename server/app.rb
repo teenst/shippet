@@ -24,4 +24,8 @@ class App < Sinatra::Base
 
   end
 
+  post '/snippet/delete' do
+    Model::Snippet.remove(params[:snippet_id])
+    "delete snipet #{params[:snipet_id]}"
+  end
 end
