@@ -7,6 +7,14 @@
 
 ;; get snippet
 ;; (shippet:get-snippet "client_test")
+(defun shippet:upload-snippet ()
+  (interactive)
+  (deferred:$
+    (deferred:url-post (concat shippet:url "snippet/create")
+      `((mode . "test-mode") (code . ,(buffer-string)))) ;; get major mode
+    (deferred:nextc it
+      (lambda (buf)
+        (message (shippet:string-from-buffer buf))))))
 
 (defun shippet:get-snippet (id)
   (deferred:$
