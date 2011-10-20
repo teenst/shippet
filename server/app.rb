@@ -25,6 +25,11 @@ class App < Sinatra::Base
 
   end
 
+  post '/snippet/delete' do
+    Model::Snippet.remove(params[:snippet_id])
+    "delete snipet #{params[:snipet_id]}"
+  end
+
   get '/snippet/client_test.json' do
     content_type :json
     JSON.unparse(
@@ -37,5 +42,6 @@ test $1 snippet
 EOF
       )
   end
+
 
 end

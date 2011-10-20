@@ -16,6 +16,10 @@ module Model
       self.collection.find_one _id: id
     end
 
+    def self.remove(id)
+      self.collection.remove _id: id
+    end
+
     def id
       self._id
     end

@@ -7,19 +7,29 @@ module Model
 
     def self.create(data)
       #バリデーションをする
-      data.merge! self.parse(data[:code])
-      id = self.insert(data)
+      id = self.insert({ mode: data["mode"] }.merge self.parse(data[:code]))
       self.find_by_id(id)
     end
 
     def self.parse(code)
-      separator = /^#[ \t]*--\s*\r\n/
+      code.gsub!(/\r\n/,"\n")
+      separator = /^#[ \t]*--[ \t]*\n/m
       return {body: code} unless  code =~ separator
       header, body = code.split(separator)
+      snippet = ["name","key","condition","group","expand-env",
+       "binding"].inject({ }){|ret,var|
+        if /^#[ \t]*#{var}[ \t]*:[ \t](.+)\n/ =~ header 
+          ret[var.to_sym] = $1.rstrip
+        end
+        ret
+      }.merge({code: body})
+      
+      snippet
+    end
 
-      p header
-      p body
-      {body: body}
+    def self.remove(id)
+      # 作者のみ消せるにする
+      self.remove(id)
     end
   end
 end
