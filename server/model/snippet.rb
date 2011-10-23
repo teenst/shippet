@@ -18,18 +18,18 @@ module Model
       header, body = code.split(separator)
       snippet = ["name","key","condition","group","expand-env",
        "binding"].inject({ }){|ret,var|
-        if /^#[ \t]*#{var}[ \t]*:[ \t](.+)\n/ =~ header 
+        if /^#[ \t]*#{var}[ \t]*:[ \t](.+)\n/ =~ header
           ret[var.to_sym] = $1.rstrip
         end
         ret
       }.merge({code: body})
-      
+
       snippet
     end
 
     def self.remove(id)
       # 作者のみ消せるにする
-      self.remove(id)
+      super
     end
   end
 end

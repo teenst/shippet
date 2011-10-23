@@ -2,6 +2,7 @@ require 'bundler/setup'
 require 'sinatra'
 require 'model'
 require 'json'
+require 'bson'
 
 class App < Sinatra::Base
 
@@ -20,14 +21,13 @@ class App < Sinatra::Base
 
   post '/snippet/create' do
     snippet = Model::Snippet.create(params)
-    p snippet
-    "#{params[:code]} #{params[:mode]}"
-
+    ""
   end
 
   post '/snippet/delete' do
-    Model::Snippet.remove(params[:snippet_id])
-    "delete snipet #{params[:snipet_id]}"
+    snippet_id = BSON::ObjectId.from_string params[:snippet_id]
+    Model::Snippet.remove snippet_id
+    "delete snipet #{params[:snippet_id]}"
   end
 
   get '/snippet/client_test.json' do
