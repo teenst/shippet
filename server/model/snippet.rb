@@ -14,17 +14,18 @@ module Model
     def self.parse(code)
       code.gsub!(/\r\n/,"\n")
       separator = /^#[ \t]*--[ \t]*\n/m
-      return {body: code} unless  code =~ separator
+      return {code: code} unless code =~ separator
       header, body = code.split(separator)
-      snippet = ["name","key","condition","group","expand-env",
-       "binding"].inject({ }){|ret,var|
+      self.header_keys.inject({code: body}){|ret,var|
         if /^#[ \t]*#{var}[ \t]*:[ \t](.+)\n/ =~ header
           ret[var.to_sym] = $1.rstrip
         end
         ret
-      }.merge({code: body})
+      }
+    end
 
-      snippet
+    def self.header_keys
+      ["name", "key", "condition", "group", "expand-env", "binding"]
     end
 
     def self.remove(id)
