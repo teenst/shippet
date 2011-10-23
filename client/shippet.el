@@ -6,7 +6,7 @@
 (defvar shippet:url "http://localhost:9393/")
 
 ;; get snippet
-;; (shippet:get-snippet "client_test")
+;; (shippet:get-snippet snippet_id)
 (defun shippet:upload-snippet ()
   (interactive)
   (deferred:$
@@ -18,7 +18,7 @@
 
 (defun shippet:get-snippet (id)
   (deferred:$
-    (deferred:url-get (concat shippet:url "snippet/" id ".json"))
+    (deferred:url-get (concat shippet:url "snippet/json?snippet_id=" id))
     (deferred:nextc it
       #'shippet:download-handler)))
 

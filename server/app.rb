@@ -30,18 +30,11 @@ class App < Sinatra::Base
     "delete snipet #{params[:snippet_id]}"
   end
 
-  get '/snippet/client_test.json' do
+  get '/snippet/json' do
+    snippet_id = BSON::ObjectId.from_string params[:snippet_id]
+    snippet = Model::Snippet.find_by_id(snippet_id)
     content_type :json
-    JSON.unparse(
-      mode:"text-mode",
-      snippet: <<-EOF
-#name: ${1:name}
-#key: ${2:key}
-#--
-test $1 snippet
-EOF
-      )
+    snippet.to_json
   end
-
 
 end

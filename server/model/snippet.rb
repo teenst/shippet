@@ -1,8 +1,14 @@
 # -*- coding: utf-8 -*-
+require 'json'
+
 module Model
   class Snippet < Collection
     def self.collection
       Model::Database.collection('snippet')
+    end
+
+    def self.find_by_id(id)
+      self.new super
     end
 
     def self.create(data)
@@ -31,6 +37,25 @@ module Model
     def self.remove(id)
       # 作者のみ消せるにする
       super
+    end
+
+    def initialize(data)
+      self.merge! data
+    end
+
+    def to_json
+      index = 1
+      header = Snippet.header_keys.inject(""){|ret, key|
+        if self.has_key? key
+          ret += "##{key}: ${#{index}:#{self[key]}}\n"
+          index += 1
+        end
+        ret
+      }
+      JSON.unparse({
+          mode: self["mode"],
+          snippet: header + "#--\n" + self["code"]
+        })
     end
   end
 end
