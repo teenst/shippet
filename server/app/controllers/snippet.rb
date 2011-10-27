@@ -26,4 +26,8 @@ Shippet.controllers :snippet do
     "post snippet"
   end
 
+  get :new do
+    render 'snippet/create'
+  end
+
 end
