@@ -1,0 +1,55 @@
+<div class="group">
+  <%= f.label :_type %><%= f.error_message_on :_type %>
+  <%= f.text_field :_type, :class => :text_field %>
+  <span class="description">Ex: a simple text</span>
+</div>
+<div class="group">
+  <%= f.label :_id %><%= f.error_message_on :_id %>
+  <%= f.text_field :_id, :class => :text_field %>
+  <span class="description">Ex: a simple text</span>
+</div>
+<div class="group">
+  <%= f.label :name %><%= f.error_message_on :name %>
+  <%= f.text_field :name, :class => :text_field %>
+  <span class="description">Ex: a simple text</span>
+</div>
+<div class="group">
+  <%= f.label :key %><%= f.error_message_on :key %>
+  <%= f.text_field :key, :class => :text_field %>
+  <span class="description">Ex: a simple text</span>
+</div>
+<div class="group">
+  <%= f.label :condition %><%= f.error_message_on :condition %>
+  <%= f.text_field :condition, :class => :text_field %>
+  <span class="description">Ex: a simple text</span>
+</div>
+<div class="group">
+  <%= f.label :group %><%= f.error_message_on :group %>
+  <%= f.text_field :group, :class => :text_field %>
+  <span class="description">Ex: a simple text</span>
+</div>
+<div class="group">
+  <%= f.label :expand_env %><%= f.error_message_on :expand_env %>
+  <%= f.text_field :expand_env, :class => :text_field %>
+  <span class="description">Ex: a simple text</span>
+</div>
+<div class="group">
+  <%= f.label :binding %><%= f.error_message_on :binding %>
+  <%= f.text_field :binding, :class => :text_field %>
+  <span class="description">Ex: a simple text</span>
+</div>
+<div class="group">
+  <%= f.label :mode %><%= f.error_message_on :mode %>
+  <%= f.text_field :mode, :class => :text_field %>
+  <span class="description">Ex: a simple text</span>
+</div>
+<div class="group">
+  <%= f.label :code %><%= f.error_message_on :code %>
+  <%= f.text_field :code, :class => :text_field %>
+  <span class="description">Ex: a simple text</span>
+</div>
+
+<div class="group navform wat-cf">
+  <%= f.submit pat(:save), :class => :button %>
+  <%= f.submit pat(:cancel), :onclick => "window.location='#{url(:snippets, :index)}';return false", :class => :button %>
+</div>

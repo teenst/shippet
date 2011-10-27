@@ -1,0 +1,54 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first active"><%= link_to pat(:list), url(:snippets, :index) %></li>
+      <li><%= link_to pat(:new), url(:snippets, :new) %></li>
+    </ul>
+  </div>
+  <div class="content">
+    <h2 class="title"><%= pat(:all) %> <% mt(:snippets) %></h2>
+    <div class="inner">
+      <table class="table">
+        <tr>
+          <th class="first"><%= mat(:snippet, :_type) %></th>
+          <th><%= mat(:snippet, :_id) %></th>
+          <th><%= mat(:snippet, :created_at) %></th>
+          <th><%= mat(:snippet, :updated_at) %></th>
+          <th><%= mat(:snippet, :name) %></th>
+          <th><%= mat(:snippet, :key) %></th>
+          <th><%= mat(:snippet, :condition) %></th>
+          <th><%= mat(:snippet, :group) %></th>
+          <th><%= mat(:snippet, :expand_env) %></th>
+          <th><%= mat(:snippet, :binding) %></th>
+          <th><%= mat(:snippet, :mode) %></th>
+          <th><%= mat(:snippet, :code) %></th>
+          <th class="last">&nbsp;</th>
+        </tr>
+        <% @snippets.each do |snippet| %>
+        <tr>
+          <td class="first"><%= snippet._type %></td>
+          <td><%= snippet._id %></td>
+          <td><%= snippet.created_at %></td>
+          <td><%= snippet.updated_at %></td>
+          <td><%= snippet.name %></td>
+          <td><%= snippet.key %></td>
+          <td><%= snippet.condition %></td>
+          <td><%= snippet.group %></td>
+          <td><%= snippet.expand_env %></td>
+          <td><%= snippet.binding %></td>
+          <td><%= snippet.mode %></td>
+          <td><%= snippet.code %></td>
+          <td class="last">
+            <%= button_to pat(:edit), url(:snippets, :edit, :id => snippet.id), :method => :get, :class => :button_to %> |
+            <%= button_to pat(:delete), url(:snippets, :destroy, :id => snippet.id), :method => :delete, :class => :button_to, :onsubmit => "return confirm('#{pat(:confirm)}')" %>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+      <div class="actions-bar wat-cf">
+        <div class="actions"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :sidebar, partial("base/sidebar") %>

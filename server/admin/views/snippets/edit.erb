@@ -1,0 +1,18 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to pat(:list), url(:snippets, :index) %></li>
+      <li><%= link_to pat(:new), url(:snippets, :new) %></li>
+      <li class="active"><%= link_to pat(:edit), url(:snippets, :edit, :id => @snippet.id) %></li>
+    </ul>
+  </div>
+  <div class="content">
+    <h2 class="title"><%= pat(:edit) %> <% mt(:snippet) %></h2>
+    <div class="inner">
+      <% form_for :snippet, url(:snippets, :update, :id => @snippet.id), :method => :put, :class => :form do |f| %>
+        <%= partial "snippets/form", :locals => { :f => f } %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% content_for :sidebar, partial("base/sidebar") %>
